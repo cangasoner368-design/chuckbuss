@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CB HABER — Gündemin En Güvenilmez Güvenilir Kaynağı</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#141416; --paper:#f6f3ec; --card:#fff;
+  --gold:#b08a2e; --gold-2:#d4af37; --black:#0c0c0f;
+  --red:#c8102e; --line:#d8d2c4; --muted:#6b675e;
+  --serif:'Playfair Display',Georgia,serif;
+  --body:'Source Serif 4',Georgia,serif;
+  --ui:'Inter',system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6}
+a{color:inherit;text-decoration:none}
+img{display:block;width:100%;height:100%;object-fit:cover}
+.wrap{max-width:1240px;margin:0 auto;padding:0 20px}
+.topbar{background:var(--black);color:#e9e4d8;font-family:var(--ui);font-size:12px;letter-spacing:.06em}
+.topbar .wrap{display:flex;justify-content:space-between;align-items:center;padding-top:7px;padding-bottom:7px}
+.parody-badge{background:var(--gold);color:#0c0c0f;font-weight:700;padding:2px 10px;border-radius:2px;font-size:11px}
+.topbar .right span{opacity:.75;margin-left:14px}
+.masthead{background:var(--paper);border-bottom:1px solid var(--line);padding:22px 0 14px;text-align:center}
+.masthead h1{font-family:var(--serif);font-weight:900;font-size:clamp(44px,7vw,84px);line-height:1}
+.masthead h1 .cb{color:var(--gold)}
+.masthead .tag{font-family:var(--ui);font-size:11px;letter-spacing:.32em;color:var(--muted);margin-top:10px;text-transform:uppercase}
+.masthead .rule{display:flex;align-items:center;gap:14px;justify-content:center;margin-top:12px}
+.masthead .rule i{height:1px;background:var(--line);flex:1;max-width:220px}
+.masthead .rule b{color:var(--gold);font-size:12px;letter-spacing:.2em;font-family:var(--ui)}
+nav.main{background:var(--black);position:sticky;top:0;z-index:50;box-shadow:0 2px 10px rgba(0,0,0,.35)}
+nav.main .wrap{display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+nav.main a{color:#efe9db;font-family:var(--ui);font-size:12.5px;font-weight:600;letter-spacing:.12em;padding:13px 14px;text-transform:uppercase;border-bottom:3px solid transparent;transition:.2s}
+nav.main a:hover{color:var(--gold-2)}
+nav.main a.active{color:var(--gold-2);border-bottom-color:var(--gold-2)}
+nav.main .search{margin-left:auto}
+nav.main .search input{background:#1c1c22;border:1px solid #33333d;color:#eee;padding:6px 10px;font-family:var(--ui);font-size:12px;width:150px;border-radius:2px}
+nav.main .search input:focus{outline:none;border-color:var(--gold)}
+.breaking{background:var(--red);color:#fff;overflow:hidden;display:flex;align-items:center;font-family:var(--ui)}
+.breaking .lbl{background:#0c0c0f;font-weight:800;font-size:12px;letter-spacing:.15em;padding:9px 16px;white-space:nowrap;display:flex;align-items:center;gap:8px;z-index:2}
+.breaking .lbl::before{content:"●";animation:blink 1s infinite}
+@keyframes blink{50%{opacity:.15}}
+.ticker{overflow:hidden;flex:1}
+.ticker-track{display:flex;width:max-content;animation:scroll 46s linear infinite}
+.ticker:hover .ticker-track{animation-play-state:paused}
+.ticker-track span{padding:9px 28px;font-size:13px;font-weight:500;white-space:nowrap}
+.ticker-track span::after{content:"◆";margin-left:28px;color:rgba(255,255,255,.55);font-size:9px}
+@keyframes scroll{to{transform:translateX(-50%)}}
+.hero{display:grid;grid-template-columns:1.55fr 1fr;gap:34px;padding:34px 0 10px;align-items:stretch}
+.hero .photo{position:relative;border:1px solid var(--line);background:#000;min-height:430px}
+.hero .photo .fake-tag{position:absolute;top:12px;left:12px;background:rgba(12,12,15,.82);color:var(--gold-2);font-family:var(--ui);font-size:10px;letter-spacing:.2em;padding:5px 10px;border:1px solid var(--gold)}
+.hero .photo .cap{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.85));color:#ddd;font-family:var(--ui);font-size:11.5px;padding:26px 14px 10px}
+.hero .side h2{font-family:var(--serif);font-weight:900;font-size:clamp(28px,3.2vw,42px);line-height:1.12}
+.hero .side .sd{display:inline-block;background:var(--red);color:#fff;font-family:var(--ui);font-size:10.5px;font-weight:800;letter-spacing:.18em;padding:4px 10px;margin-bottom:14px}
+.hero .side .lead{font-size:17.5px;color:#3a3a3a;margin-top:14px}
+.hero .side .meta{font-family:var(--ui);font-size:12px;color:var(--muted);margin-top:16px;border-top:1px solid var(--line);padding-top:12px}
+.hero .side .meta b{color:var(--ink)}
+.hero .side .go{display:inline-block;margin-top:18px;background:var(--black);color:#fff;font-family:var(--ui);font-size:12px;font-weight:700;letter-spacing:.12em;padding:12px 22px;border:1px solid var(--black);transition:.2s;cursor:pointer}
+.hero .side .go:hover{background:var(--gold);border-color:var(--gold);color:#0c0c0f}
+.cols{display:grid;grid-template-columns:1fr 330px;gap:40px;padding:30px 0 50px}
+.sec-title{font-family:var(--ui);font-size:12px;font-weight:800;letter-spacing:.22em;border-bottom:3px solid var(--black);padding-bottom:8px;margin-bottom:22px;display:flex;justify-content:space-between;align-items:baseline}
+.sec-title small{font-weight:500;color:var(--muted);letter-spacing:.05em;font-size:11px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+.card{background:var(--card);border:1px solid var(--line);cursor:pointer;transition:.18s;display:flex;flex-direction:column}
+.card:hover{box-shadow:0 10px 26px rgba(20,20,22,.12);transform:translateY(-2px)}
+.card .ph{aspect-ratio:16/10;overflow:hidden;background:#111}
+.card .bd{padding:16px 18px 18px}
+.card .cat{font-family:var(--ui);font-size:10.5px;font-weight:800;letter-spacing:.2em;color:var(--gold);text-transform:uppercase}
+.card h3{font-family:var(--serif);font-size:20px;line-height:1.25;margin:8px 0;font-weight:700}
+.card p{font-size:14.5px;color:#4c4c4c;line-height:1.55}
+.card .meta{font-family:var(--ui);font-size:11.5px;color:var(--muted);margin-top:12px;border-top:1px solid var(--line);padding-top:10px;display:flex;justify-content:space-between}
+.widget{background:var(--card);border:1px solid var(--line);margin-bottom:26px}
+.widget .hd{background:var(--black);color:#fff;font-family:var(--ui);font-size:11.5px;font-weight:800;letter-spacing:.18em;padding:11px 16px;display:flex;gap:8px}
+.widget .hd i{color:var(--gold-2);font-style:normal}
+.widget .in{padding:16px}
+.rank{list-style:none;counter-reset:r}
+.rank li{counter-increment:r;display:flex;gap:12px;padding:11px 0;border-bottom:1px solid var(--line);cursor:pointer}
+.rank li:last-child{border-bottom:0}
+.rank li::before{content:counter(r);font-family:var(--serif);font-weight:900;font-size:26px;color:var(--gold);line-height:1;min-width:30px}
+.rank li h4{font-family:var(--serif);font-size:15px;line-height:1.3;font-weight:700}
+.rank li small{font-family:var(--ui);font-size:10.5px;color:var(--muted);display:block;margin-top:3px}
+.rank li:hover h4{color:var(--gold)}
+.poll .q{font-family:var(--serif);font-weight:700;font-size:17px;margin-bottom:12px;line-height:1.3}
+.poll .opt{width:100%;text-align:left;background:#faf7f0;border:1px solid var(--line);padding:10px 12px;font-family:var(--ui);font-size:13px;margin-bottom:8px;cursor:pointer;position:relative;overflow:hidden}
+.poll .opt:hover{border-color:var(--gold)}
+.poll .bar{height:100%;background:rgba(176,138,46,.18);position:absolute;left:0;top:0;width:0;transition:width .6s}
+.poll .opt span,.poll .pct{position:relative}
+.poll .pct{float:right;font-weight:700;color:var(--gold)}
+.poll .note{font-family:var(--ui);font-size:11px;color:var(--muted);margin-top:10px}
+.poll .done{background:var(--black);color:var(--gold-2);padding:10px;font-family:var(--ui);font-size:12px;text-align:center;margin-top:6px}
+.editor-note{font-size:14px;color:#4c4c4c;font-style:italic}
+.editor-note b{font-style:normal;font-family:var(--ui);font-size:11px;letter-spacing:.1em;color:var(--gold);display:block;margin-bottom:6px}
+.article{padding:30px 0 60px}
+.crumb{font-family:var(--ui);font-size:11.5px;color:var(--muted);margin-bottom:18px}
+.crumb a:hover{color:var(--gold)}
+.article .cat{font-family:var(--ui);font-size:11px;font-weight:800;letter-spacing:.22em;color:var(--red)}
+.article h1{font-family:var(--serif);font-weight:900;font-size:clamp(30px,4.4vw,52px);line-height:1.12;margin:10px 0 14px;max-width:900px}
+.article .lead{font-size:20px;color:#3c3c3c;font-style:italic;max-width:820px;border-left:4px solid var(--gold);padding-left:16px;margin-bottom:20px}
+.article .byline{display:flex;gap:14px;align-items:center;font-family:var(--ui);font-size:13px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:12px 0;margin-bottom:26px;flex-wrap:wrap}
+.avatar{width:44px;height:44px;border-radius:50%;background:var(--black);color:var(--gold-2);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:900;font-size:17px}
+.byline b{display:block;font-size:14px}
+.byline .role{color:var(--muted);font-size:11.5px}
+.byline .stats{margin-left:auto;color:var(--muted);font-size:12px}
+.figure{border:1px solid var(--line);margin-bottom:8px;background:#000;aspect-ratio:16/9}
+.figcap{font-family:var(--ui);font-size:12px;color:var(--muted);margin-bottom:30px}
+.body p{font-size:18px;margin-bottom:18px;max-width:760px}
+.body blockquote{max-width:760px;margin:26px 0;padding:20px 28px;background:var(--black);color:#f0e9d8;font-family:var(--serif);font-style:italic;font-size:21px;line-height:1.4;position:relative}
+.body blockquote::before{content:"“";position:absolute;top:-18px;left:10px;font-size:70px;color:var(--gold)}
+.body blockquote cite{display:block;font-family:var(--ui);font-style:normal;font-size:11px;letter-spacing:.15em;color:var(--gold-2);margin-top:10px}
+.tags{margin:30px 0;display:flex;gap:8px;flex-wrap:wrap}
+.tags span{font-family:var(--ui);font-size:11px;background:#ece7db;border:1px solid var(--line);padding:5px 12px;color:#555}
+.related{margin-top:40px}
+.comments{margin-top:44px;border-top:3px solid var(--black);padding-top:22px;max-width:820px}
+.c-form{background:var(--card);border:1px solid var(--line);padding:18px;margin-bottom:26px}
+.c-form h4{font-family:var(--ui);font-size:12px;letter-spacing:.15em;margin-bottom:12px}
+.c-form input,.c-form textarea{width:100%;font-family:var(--ui);font-size:14px;padding:10px 12px;border:1px solid var(--line);background:#fbf9f4;margin-bottom:10px}
+.c-form textarea{min-height:90px;resize:vertical;font-family:var(--body)}
+.c-form input:focus,.c-form textarea:focus{outline:none;border-color:var(--gold)}
+.c-form button{background:var(--black);color:#fff;font-family:var(--ui);font-weight:700;font-size:12.5px;letter-spacing:.12em;padding:11px 24px;border:0;cursor:pointer}
+.c-form button:hover{background:var(--gold);color:#0c0c0f}
+.c-form .hint{font-family:var(--ui);font-size:10.5px;color:var(--muted);margin-top:8px}
+.comment{border-bottom:1px solid var(--line);padding:16px 0;display:flex;gap:14px}
+.comment .avatar{width:38px;height:38px;font-size:14px;flex-shrink:0}
+.comment h5{font-family:var(--ui);font-size:13.5px}
+.comment h5 small{color:var(--muted);font-weight:400;margin-left:8px;font-size:11px}
+.comment p{font-size:15.5px;margin-top:4px;color:#333}
+.no-c{font-family:var(--ui);font-size:13px;color:var(--muted);padding:14px 0}
+.page-title{font-family:var(--serif);font-weight:900;font-size:clamp(30px,4vw,46px);padding:34px 0 6px}
+.page-sub{font-family:var(--ui);font-size:12px;letter-spacing:.15em;color:var(--muted);padding-bottom:24px;border-bottom:1px solid var(--line);margin-bottom:30px}
+.panel{max-width:860px;padding-bottom:60px}
+.panel form{background:var(--card);border:1px solid var(--line);padding:24px;margin-bottom:34px}
+.panel label{font-family:var(--ui);font-size:11px;font-weight:700;letter-spacing:.12em;display:block;margin:14px 0 6px;color:#444}
+.panel input,.panel select,.panel textarea{width:100%;padding:10px 12px;border:1px solid var(--line);font-family:var(--ui);font-size:14px;background:#fbf9f4}
+.panel textarea{min-height:130px;font-family:var(--body)}
+.panel .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.panel button{margin-top:18px}
+.panel .u-list article{background:var(--card);border:1px solid var(--line);padding:14px 16px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;gap:14px}
+.panel .u-list h4{font-family:var(--serif);font-size:16px}
+.panel .u-list small{font-family:var(--ui);color:var(--muted);font-size:11px}
+.del{background:var(--red);color:#fff;border:0;font-family:var(--ui);font-size:11px;font-weight:700;padding:7px 12px;cursor:pointer}
+.warn{background:#fdf6e3;border:1px solid var(--gold);padding:12px 16px;font-family:var(--ui);font-size:12.5px;color:#6b5a20;margin-bottom:22px}
+footer{background:var(--black);color:#b9b3a4;font-family:var(--ui);font-size:12.5px;margin-top:20px}
+footer .wrap{display:grid;grid-template-columns:2fr 1fr 1fr;gap:34px;padding:44px 20px 30px}
+footer h5{color:var(--gold-2);font-size:12px;letter-spacing:.18em;margin-bottom:12px}
+footer .logo{font-family:var(--serif);font-size:30px;font-weight:900;color:#fff}
+footer .logo span{color:var(--gold)}
+footer a:hover{color:var(--gold-2)}
+footer ul{list-style:none}
+footer li{margin-bottom:7px}
+footer .base{border-top:1px solid #26262c;padding:16px 20px;font-size:11px;color:#7d786c;text-align:center}
+@media(max-width:980px){.hero,.cols{grid-template-columns:1fr}.grid{grid-template-columns:1fr}footer .wrap{grid-template-columns:1fr}.panel .row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="topbar"><div class="wrap">
+  <div>17 Kasım 2026, Salı · Ankara · <span class="parody-badge">PARODİ</span></div>
+  <div class="right"><span>Hava: 9°C, Bass'lik rüzgârı</span><span>Simit: 15 TL (Bass 250 teklif etti)</span></div>
+</div></div>
+
+<header class="masthead"><div class="wrap">
+  <h1><span class="cb">CB</span> HABER</h1>
+  <div class="tag">Gündemin En Güvenilmez Güvenilir Kaynağı · Kuruluş: Dün, Batan Gemi: Yarın</div>
+  <div class="rule"><i></i><b>17 KASIM 2026</b><i></i></div>
+</div></header>
+
+<nav class="main"><div class="wrap" id="nav">
+  <a href="#/">Ana Sayfa</a>
+  <a href="#/kategori/gundem">Gündem</a>
+  <a href="#/kategori/magazin">Magazin</a>
+  <a href="#/kategori/din">Din &amp; Yaşam</a>
+  <a href="#/kategori/ekonomi">Ekonomi</a>
+  <a href="#/gundem">Chuck Bass Gündemi</a>
+  <a href="#/panel">Yönetim</a>
+  <div class="search"><input id="q" type="text" placeholder="Ara: simit, taç, 850 TL…"></div>
+</div></nav>
+
+<div class="breaking"><div class="lbl">SON DAKİKA</div>
+  <div class="ticker"><div class="ticker-track" id="ticker"></div></div>
+</div>
+
+<main id="app"></main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <div class="logo"><span>CB</span> HABER</div>
+      <p style="margin-top:12px;line-height:1.7">Bu site tamamen <b style="color:#fff">parodi/hayal ürünüdür</b>. Yayımlanan hiçbir haber gerçek değildir; hiçbir kişi, kurum veya simitçi temsil edilmemektedir. Chuck Bass kurgusal bir karakterdir ve bu sitedeki hiçbir gelişmeden haberdar değildir (muhtemelen "stratejik sessizlik" içindedir).</p>
+    </div>
+    <div><h5>BÖLÜMLER</h5><ul>
+      <li><a href="#/kategori/gundem">Gündem</a></li>
+      <li><a href="#/kategori/magazin">Magazin</a></li>
+      <li><a href="#/kategori/din">Din &amp; Yaşam</a></li>
+      <li><a href="#/kategori/ekonomi">Ekonomi</a></li>
+      <li><a href="#/gundem">En Çok Konuşulanlar</a></li>
+    </ul></div>
+    <div><h5>KURUMSAL</h5><ul>
+      <li><a href="#/panel">Yönetici Paneli</a></li>
+      <li>Reklam: 850 TL / kahve</li>
+      <li>İtirazlar: altın tepsiyle</li>
+    </ul></div>
+  </div>
+  <div class="base">© 2026 CB HABER — Gerçek değildir, gülümsenir. · "Ben böyleyim." — C. Bass</div>
+</footer>
+
+<script>
+/* ================= SENİN ATTIĞIN 5 GÖRSEL =================
+   İstersen bu URL'leri kendi dosyalarınla değiştir:
+   klasöre gorseller/ adında bir alt klasör açıp 1-chuck-bar.jpg,
+   2-nyt.jpg, 3-magazine.jpg, 4-cami.jpg, 5-dugun.jpg koy ve
+   aşağıdaki yolları "gorseller/1-chuck-bar.jpg" gibi yap. */
+const IMG = {
+  chuckBar:'https://image.qwenlm.ai/public_source/d77cb4e3-395a-4e21-9038-caaadd2beedf/6318f3eaa-404e-4ca9-be37-b03b80aab8aa4287.png', // koyu takım + kırmızı mendil
+  nyt:'https://image.qwenlm.ai/public_source/d77cb4e3-395a-4e21-9038-caaadd2beedf/0318f3eaa-404e-4ca9-be37-b03b80aab8aa9150.png',       // NYT ekran görüntüsü
+  magazine:'https://image.qwenlm.ai/public_source/d77cb4e3-395a-4e21-9038-caaadd2beedf/2318f3eaa-404e-4ca9-be37-b03b80aab8aa6959.png',   // CULT MAGAZİN kapağı
+  cami:'https://image.qwenlm.ai/public_source/d77cb4e3-395a-4e21-9038-caaadd2beedf/2318f3eaa-404e-4ca9-be37-b03b80aab8aa8824.png',      // camide dua
+  dugun:'https://image.qwenlm.ai/public_source/d77cb4e3-395a-4e21-9038-caaadd2beedf/1318f3eaa-404e-4ca9-be37-b03b80aab8aa1664.png'      // düğün + içecek
+};
+const CATS = {gundem:'GÜNDEM',magazin:'MAGAZİN',din:'DİN & YAŞAM',ekonomi:'EKONOMİ'};
+const AUTHORS = {
+  muhabir:['CB Haber Ankara Muhabiri','Ankara Bürosu'],
+  serena:['Serena van der Woodsen','Magazin Editörü'],
+  dan:['Dan Humphrey','Gündem Yazarı'],
+  nate:['Nate Archibald','Ekonomi Muhabiri'],
+  vanessa:['Vanessa Abrams','Kültür-Sanat'],
+  lily:['Lily van der Woodsen','Dış Haberler'],
+  dorota:['Dorota','Özel Kalem / Görgü Tanığı'],
+  masa:['CB Haber Ekonomi Masası','Araştırma']
+};
+const A = [
+ {id:'a1',cat:'magazin',hero:true,img:IMG.dugun,author:'muhabir',date:'17 Kasım 2026 · 10:42',views:284300,
+  title:'ANKARA\'DA ŞOK GÖRÜNTÜLER! Chuck Bass ve Blair Waldorf Kızılay\'da yakalandı!',
+  lead:'Görgü tanıklarının iddiasına göre çift, Kızılay\'da yürürken görüntülendi. Chuck Bass\'in bir simide 250 TL teklif ettiği öne sürüldü.',
+  body:[
+   'Saat 10:40 sıralarında Yüksel Caddesi\'nde görülen çift, çevrede kısa süreli bir "Upper East Side" etkisi yarattı. Bir görgü tanığı Bass\'in simitçiye "bu tepsinin tamamı benim" dediğini, simitçinin ise "kardeşim tek tek al" diye karşılık verdiğini anlattı.',
+   'Blair Waldorf\'un başındaki taç, Ankara rüzgârına rağmen yerinde kaldı; sosyal medyada "stratejik saç spreyi" başlığı açıldı. Uzmanlar tacın rüzgâr direncinin 12 saat süren bir toplantıya eşdeğer olduğunu iddia etti.',
+   'Q:Ben bir simidi onurlandırdım. Onurlandırılamayan simit yoktur.|— Chuck Bass, olay yerinden uzaklaşırken',
+   'CB Haber\'in ulaştığı simitçi esnafı, fiyatın 15 TL olduğunu ve Bass\'in teklifini "sanatsal bir provokasyon" olarak nitelendirdi. Çift, daha sonra bir AVM\'de "eldiven reyonu" önünde uzun süre poz verdi.'
+  ],
+  tags:['Kızılay','Simit','Blair Waldorf','Görgü Tanığı'],
+  comments:[
+   {name:'AnkaraRüzgârı',text:'Kendim gördüm, simit altın tepsiyle gelmedi ama gözleriyle geldi. Şikâyetçi değilim.',date:'17 Kasım 2026'},
+   {name:'SimitçiHamdi',text:'250 TL teklif etti, 15 TL istedi. Pazarlık payı yok dedim, "Ben fiyat değil, anı satın alırım" dedi. Delikanlı çocuk.',date:'17 Kasım 2026'},
+   {name:'TaçKraliçesi',text:'Tacı rüzgâr almadı çünkü o bir Waldorf tacı. Geri kalan her şey detay.',date:'17 Kasım 2026'}
+  ]},
+ {id:'a2',cat:'gundem',img:IMG.chuckBar,author:'serena',date:'17 Kasım 2026 · 09:15',views:156200,
+  title:'DİKKAT! Chuck Bass\'i yolda görürseniz kaçın, kalbinizi kaptırabilirsiniz.',
+  lead:'Uzmanlar, takım elbiseli ve özgüvenli erkeklerin oluşturduğu "Bass Etkisi"nin ani kalp çarpıntısına yol açtığını belirtti.',
+  body:[
+   'Hayali Ankara Üniversitesi Absürt Kardiyoloji Bölümü\'nden Prof. Dr. Bart Bass, yüksek özgüven ve ipek kravat kombinasyonunun "geri dönülemez çekim alanı" yarattığını söyledi. "Takım elbise ütülmüyse risk iki katına çıkar" dedi.',
+   'Vatandaşlara, kaldırımda Chuck Bass görüldüğünde telefon kamerasını değil, duygularını kapatmaları tavsiye edildi.',
+   'Q:Kaçmak mı? Ben kaçmam. Ben davet ederim. Üstelik davetiye 350 TL.|— Chuck Bass, tavsiyelere yanıt olarak'
+  ],
+  tags:['Uyarı','Sağlık','Takım Elbise'],
+  comments:[{name:'KızılayGezgini',text:'Gördüm. Kaçamadım. Şimdi nişanlıyız. Teşekkürler CB Haber.',date:'17 Kasım 2026'}]},
+ {id:'a3',cat:'gundem',img:IMG.nyt,author:'dan',date:'17 Kasım 2026 · 08:40',views:98400,
+  title:'Yılın bencil adayı belli oldu: Chuck Bass rakip tanımıyor.',
+  lead:'Oylamada rakiplerine "sizin adaylığınızı satın aldım" dediği iddia edildi. Jüri, bu açıklamayı "kurumsal cesaret" olarak puanladı.',
+  body:[
+   'Her yıl düzenlenen "Yılın En Bencil Adamı" yarışmasına bu yıl rekor başvuru geldi. Chuck Bass\'in başvuru formunun "Takımda çalışmaya uygun musunuz?" sorusuna "Ben takımım" yazdığı görüldü.',
+   'Rakip adayların çekildiği yarışmada Bass tek başına üç kategoriye birden aday gösterildi: "En İyi Özgüven", "En Pahalı Simit" ve "En Şık Sessizlik".',
+   'Q:Bencillik değil bu. Kendime verdiğim değerin kurumsal hâli.|— Bass, adaylık açıklamasında'
+  ],
+  tags:['Yılın Adayları','Ödül'],comments:[]},
+ {id:'a4',cat:'gundem',img:IMG.chuckBar,author:'nate',date:'16 Kasım 2026 · 22:05',views:87100,
+  title:'Chuck Bass yine kendini haklı çıkardı: "Ben böyleyim."',
+  lead:'Herhangi bir suçlamaya verdiği tek cümlelik yanıt, sosyal medyada "Bass Savunması" olarak trend oldu. Avukatlar savunmayı "stratejik olarak kusursuz" buldu.',
+  body:[
+   'Gazetecilerin "Neden bir kahveye 850 TL ödediniz?" sorusuna Bass, gözlüklerini çıkarıp sadece "Ben böyleyim" dedi. Salonda kısa bir alkış kopması yaşandı.',
+   'Uzmanlar bu savunmanın mahkemelerde kullanılamayacağını ancak kahve zincirlerinde geçerli tek kimlik belgesi olduğunu belirtti.',
+   'Q:Ben böyleyim.|— Chuck Bass, tüm sorulara ortak yanıt'
+  ],
+  tags:['Savunma','Trend'],comments:[]},
+ {id:'a5',cat:'gundem',img:IMG.chuckBar,author:'vanessa',date:'16 Kasım 2026 · 18:30',views:76500,
+  title:'Uzmanlar uyardı: Her takım elbise giyene Chuck Bass demeyin.',
+  lead:'Son bir ayda 412 kişinin "takım elbise nedeniyle" Bass sanıldığı, 37 kişinin ise "aslında Bass olmadığı için" üzüldüğü açıklandı.',
+  body:[
+   'Ankara Çarşı Esnaf Meclisi, "kravat takan her erkeğe \'Bass Bey, buyurun\' denmemesi" konusunda ortak bildiri yayımladı. Bildiride, "mendil de cebi süslüyor olabilir ama bu onu Bass yapmaz" ifadesi yer aldı.',
+   'Ayrım noktasının "bakış açısı" olduğu belirtildi: Bass, bir simide değil simidin hayatındaki yere bakar.',
+   'Q:Beni taklit edebilirsiniz. Kemerinizi sıkı tutun, o kadar.'
+  ],
+  tags:['Uyarı','Moda'],comments:[]},
+ {id:'a6',cat:'magazin',img:IMG.dugun,author:'muhabir',date:'17 Kasım 2026 · 07:55',views:201400,
+  title:'Chuck Bass ve Blair Waldorf Ankara\'da görüntülendi!',
+  lead:'Atatürk Orman Çiftliği\'nde "el ele" yürüyen çift, "Ankara\'nın Upper East Side\'ı" yorumlarına yol açtı.',
+  body:[
+   'Çiftin fotoğrafı gece 01:30\'da servis edildi. Bass\'in kolunda Waldorf\'un eldiveni, Waldorf\'un başında Bass\'in kravatı vardı; "aksesuvar takası" başlığıyla 120 bin beğeni aldı.',
+   'Q:Ankara\'yı seveceksin. Özellikle simitlerini. Ve beni. Sırasıyla.|— Bass, hayali basın açıklamasında'
+  ],
+  tags:['Ankara','Blair Waldorf','Görüntülendi'],comments:[]},
+ {id:'a7',cat:'magazin',img:IMG.magazine,author:'serena',date:'17 Kasım 2026 · 07:55',views:201400,
+  title:'Blair Waldorf\'un gizemli paylaşımı sosyal medyayı karıştırdı.',
+  lead:'Sadece bir taç fotoğrafı. Açıklama yok. 400 bin yorum. Bass cephesinden tek emoji geldi: 🎩',
+  body:[
+   'Waldorf\'un gece 02:14\'te paylaştığı taç fotoğrafı, "barışma sinyali", "savaş ilanı" ve "sadece güzel bir fotoğraf" olmak üzere üç ayrı komplo teorisiyle yorumlandı.',
+   'Bass\'in tek emoji\'lik yanıtı "minimalist diplomasi" olarak değerlendirildi.',
+   'Q:Taç konuşmaz. Taç hatırlatır.'
+  ],
+  tags:['Blair Waldorf','Sosyal Medya'],comments:[{name:'GossipGirlAnkara',text:'Üst Doğu artık Ankara. Taç Kızılay\'a indi. Her şeyi biliyorum. 🎩',date:'17 Kasım 2026'}]},
+ {id:'a8',cat:'magazin',img:IMG.magazine,author:'dorota',date:'16 Kasım 2026 · 21:12',views:64200,
+  title:'Chuck Bass\'in eski sevgililerine gönderme yaptığı iddia edildi.',
+  lead:'Bass\'in "herkes yerine geçer, taç kalır" sözünün kimin için olduğu tartışma yarattı. Dorota açıklamanın "yanlış çevrildiğini" söyledi.',
+  body:[
+   'Sözün söylendiği mekânda bulunan üç ayrı kişi, cümlenin üç ayrı anlama geldiğini iddia etti. Bass cephesi "her anlam doğrudur" açıklamasıyla tartışmayı daha da büyütmeyi başardı.',
+   'Q:Ben gönderme yapmam. Gönderme beni bulur.'
+  ],
+  tags:['Dedikodu','Magazin'],comments:[]},
+ {id:'a9',cat:'magazin',img:IMG.dugun,author:'lily',date:'16 Kasım 2026 · 15:48',views:143800,
+  title:'Çiftin ayrıldığı iddia edildi, Chuck Bass konuya ilişkin sessizliğini koruyor.',
+  lead:'Sessizlik, Bass ailesine göre "stratejik bir iltifat". Waldorf cephesinden ise yanıt gecikmedi: "Taç takımda."',
+  body:[
+   'Ayrılık iddiasının kaynağının, çiftin 4 dakika boyunca farklı yönlere bakması olduğu anlaşıldı. Uzmanlar bu sürenin "ilişki krizi" mi yoksa "güneşten korunma" mı olduğu konusunda ikiye bölündü.',
+   'Q:Sessizliğim, hakkımdaki en doğru haberdir.'
+  ],
+  tags:['Ayrılık İddiası','Blair Waldorf'],comments:[{name:'AşkKaleci',text:'4 dakika farklı yöne bakmakla bitmez bu. Ben Bass\'in gözlerine baktım, 40 dakika sürdü.',date:'16 Kasım 2026'}]},
+ {id:'a10',cat:'din',img:IMG.cami,author:'muhabir',date:'17 Kasım 2026 · 13:02',views:189700,
+  title:'Chuck Bass camide dua ederken yakalandı!',
+  lead:'Takım elbisesinin ceplerinden kravat, mendil ve iki adet simit kuponu çıktı. Cemaat, "iç huzurunu bozmadık" dedi.',
+  body:[
+   'Öğle namazı sonrası cami avlusunda tek başına otururken görüntülenen Bass\'in, bir süre sonra "Bugün biraz huzur aradım" dediği aktarıldı. Cemaatten bir vatandaş, "Huzur arayan herkes gibiydi, sadece ayakkabıları farklıydı" diye konuştu.',
+   'İmam Efendi, Bass\'e "takım elbiseyle avlu daha şık oldu" esprisiyle karşılık verdi. İkili, avluda 12 dakika sohbet etti; sohbetin konusu "simit ve sabır" oldu.',
+   'Q:Huzur pahalı değildir. Ama bugün ödeyecek param yok, mendilimi bırakayım.'
+  ],
+  tags:['Cami','Huzur','Ankara'],comments:[{name:'AvludanBirAmca',text:'Yanıma oturdu, çay ısmarladım, o bana "kravat ipek, çay ince belli" dedi. Anlaştık.',date:'17 Kasım 2026'}]},
+ {id:'a11',cat:'din',img:IMG.cami,author:'vanessa',date:'17 Kasım 2026 · 13:40',views:71300,
+  title:'Cami çıkışında görüntülenen Bass: "Bugün biraz huzur aradım."',
+  lead:'"Biraz" kelimesinin Bass için 47 dakika anlamına geldiği, bu sürenin rekor olduğu belirtildi.',
+  body:[
+   'Çıkışta gazetecileri gören Bass\'in "Röportaj yok, sadece huzur var" diyerek arka kapıdan ayrıldığı iddia edildi. Arka kapıdan ayrılma girişiminin üç kez denendiği, dördüncüsünde başarılı olduğu öğrenildi.',
+   'Q:Huzur, kampanya değildir. Ama olsa beğenirdim.'
+  ],
+  tags:['Açıklama','Huzur'],comments:[]},
+ {id:'a12',cat:'din',img:IMG.cami,author:'dan',date:'17 Kasım 2026 · 14:20',views:95600,
+  title:'Chuck Bass cuma namazı sonrası simit kuyruğunda görüldü.',
+  lead:'Kuyrukta "önden alayım" teklifinin reddedildiği, Bass\'in "bu kuyruk benim şirketim olmalı" dediği iddia edildi.',
+  body:[
+   'Kuyruktaki vatandaşların "Cuma bereketi hepimize" diyerek Bass\'i son sıraya davet ettiği, Bass\'in ise "son sıra, en iyi sıradır" diyerek kabul ettiği aktarıldı. Bu kabul, mahallede "Bass Dersi" olarak anılmaya başlandı.',
+   'Simitçi, Bass\'in simidi "poşetle değil, tokalaşarak" aldığını esprili dille anlattı.',
+   'Q:Kuyruk, sabrın en ucuz kursudur.'
+  ],
+  tags:['Cuma','Simit Kuyruğu'],comments:[]},
+ {id:'a13',cat:'ekonomi',img:IMG.nyt,author:'nate',date:'17 Kasım 2026 · 11:30',views:132900,
+  title:'Chuck Bass\'in serveti yeniden gündemde: Bir günde 3 şirket satın aldığı iddia edildi.',
+  lead:'Satın alınan şirketler arasında bir "simit startup\'ı" ve bir "taç lojistiği" firmasının olduğu öne sürüldü.',
+  body:[
+   'Bass Holding\'in Ankara\'daki ilk yatırım hamlesinin detayları: "SimitCo" (değerleme: bir tepsi), "TaçExpress" (hedef: rüzgâra karşı teslimat) ve "Kahve850" (iş modeli: tek fiyat, sonsuz kahve).',
+   'Ekonomistler, üç şirketin toplam değerinin "bir akşam yemeği" ettiğini, ancak marka değerinin "bir bakış" olduğunu belirtti.',
+   'Q:Ben şirket satın almam. Şirketler beni hak eder.'
+  ],
+  tags:['Servet','Yatırım'],comments:[{name:'StartupGuru',text:'SimitCo\'ya tohum yatırım yaptım. Yatırımım: 15 TL. Çıkış: 250 TL teklif. Harika.',date:'17 Kasım 2026'}]},
+ {id:'a14',cat:'ekonomi',img:IMG.chuckBar,author:'masa',date:'16 Kasım 2026 · 19:25',views:118400,
+  title:'Bass ailesinin yeni yatırımı: Ankara\'da döner zinciri!',
+  lead:'Menüde "Waldorf Special" döner: acı sos opsiyonel, mayonez yasak. İlk şube Kızılay\'da, ikinci şube "kalabalık gelirse" İstanbul\'da.',
+  body:[
+   'Zincirin konsepti "lüks döner": bıçak sesi için fon müziği, dürüm sarımı keten kumaş, ayran ise kristal bardakta. Yorumcular "dönerin üst sınıfı" ifadesini kullandı.',
+   'Esnaf temsilcisi, "Biz de iyi döner yapıyoruz ama bizde mendil yok" diyerek rekabetin "aksesuvar" boyutuna dikkat çekti.',
+   'Q:Döner döner, ben dönmem. Felsefemiz bu.'
+  ],
+  tags:['Döner','Yatırım','Ankara'],comments:[{name:'DürümUstası',text:'Keten dürüm olur mu? Oldu. 850 TL\'ye. Yiyen pişman, yemeyen meraklı.',date:'16 Kasım 2026'}]},
+ {id:'a15',cat:'ekonomi',img:IMG.chuckBar,author:'serena',date:'16 Kasım 2026 · 17:05',views:104700,
+  title:'Chuck Bass\'in bir kahveye 850 TL ödediği öne sürüldü.',
+  lead:'Kahveci: "Bir şeker istedi, üç şeker geldi, fiyat yine 850." Fişin fotoğrafı sosyal medyada "kahvenin tapusu" olarak paylaşıldı.',
+  body:[
+   'Olayın yaşandığı mekânda kahvenin menü fiyatının 90 TL olduğu, Bass\'in "kalanını bahşiş olarak fincanın içine bırakın" dediği aktarıldı. Fincan, müze müdürlüğüne başvuru konusu oldu.',
+   'Ekonomistler, 850 TL\'lik kahvenin "enflasyona değil, hikâyeye" ödendiğini belirtti. Hikâyenin kilosu 760 TL.',
+   'Q:Kahve soğur. Fiyat anısı soğumaz.'
+  ],
+  tags:['Kahve','850 TL'],comments:[{name:'KahveMolası',text:'Ben 90 TL veriyorum, uyanıyorum. O 850 veriyor, uyanmıyor. Fark bu.',date:'16 Kasım 2026'}]},
+ {id:'a16',cat:'magazin',img:IMG.dugun,author:'lily',date:'15 Kasım 2026 · 20:40',views:88900,
+  title:'Chuck Bass\'in düğün davetiyesinin 350 TL olduğu iddia edildi.',
+  lead:'Davetiyede "hediye olarak duygusal bağ yeterlidir, nakit de olur" notu yer aldı. Yorumlar ikiye bölündü.',
+  body:[
+   'Davetiyenin kâğıdının keten karışımı, yazısının el yazması (Bass\'in kendi eliyle, 3 saatte) olduğu öğrenildi. Üzerinde "Kıyafet kodu: Takım elbise ya da takım elbise" yazıyor.',
+   'Q:Sevmek bedava. Sevgiyi kutlamak 350 TL.'
+  ],
+  tags:['Düğün','Davetiye'],comments:[]}
+];
+const TICKER_EXTRA = [
+ 'Uzmanlar: "Chuck Bass\'e güvenmeyin ama takım elbisesine güvenebilirsiniz."',
+ 'Bass Holding: "Döner zinciri yatırımımız ciddidir, acı sos opsiyoneldir."',
+ 'Gossip Girl artık Ankara\'dan yayında: "Üst Doğu Şehir."',
+ 'Bass ailesi avukatları: "Herhangi bir simit davasıyla ilgimiz yoktur."',
+ 'Blair Waldorf\'un taç paylaşımı 400 bin yorum aldı; Bass\'tan tek emoji: 🎩',
+ 'Kahveciler odası: "850 TL\'lik kahve bir defa olur, sonra menü olur."'
+];
+
+/* ================= STATE ================= */
+const LS={get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},set(k,v){localStorage.setItem(k,JSON.stringify(v))}};
+let userArts=LS.get('cb_articles_v1',[]);
+let extraComments=LS.get('cb_comments_v1',{});
+let views=LS.get('cb_views_v1',{});
+let poll=LS.get('cb_poll_v1',{voted:false,choice:-1,counts:[1284,2210,640,1893]});
+const POLL_Q='Chuck Bass\'e güveniyor musunuz?';
+const POLL_OPTS=['Evet, takım elbiseye güven duyulur','Hayır, ama simit için dayanırım','Sadece cuma günleri','Bu anket için 850 TL mi ödedim?'];
+const allArts=()=>[...A,...userArts];
+const findArt=id=>allArts().find(x=>x.id===id);
+const commentsFor=id=>[...(extraComments[id]||[]).reverse(),...((findArt(id)||{}).comments||[])];
+const fmt=n=>n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,'.');
+const score=a=>(a.views||0)+(views[a.id]||0)+commentsFor(a.id).length*4000;
+const esc=s=>(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+
+function phImg(src){
+  const fb="data:image/svg+xml,"+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500"><rect width="100%" height="100%" fill="#0c0c0f"/><text x="50%" y="52%" font-size="120" fill="#b08a2e" font-family="Georgia" text-anchor="middle">CB</text></svg>');
+  return '<img src="'+src+'" loading="lazy" onerror="this.onerror=null;this.src=\''+fb+'\'" alt="">';
+}
+function cardHTML(a){
+  const [name]=AUTHORS[a.author]||[a.author||'CB Haber','Muhabir'];
+  return '<article class="card" onclick="location.hash=\'#/haber/'+a.id+'\'">'
+   +'<div class="ph">'+phImg(a.img)+'</div>'
+   +'<div class="bd"><div class="cat">'+(CATS[a.cat]||'HABER')+'</div>'
+   +'<h3>'+esc(a.title)+'</h3><p>'+esc(a.lead)+'</p>'
+   +'<div class="meta"><span>'+esc(name)+'</span><span>'+fmt((a.views||0)+(views[a.id]||0))+' görüntülenme</span></div></div></article>';
+}
+function pollHTML(){
+  const total=poll.counts.reduce((x,y)=>x+y,0);
+  let h='<div class="poll"><div class="q">'+POLL_Q+'</div>';
+  if(!poll.voted){
+    POLL_OPTS.forEach((o,i)=>{h+='<button class="opt" onclick="vote('+i+')"><span>'+esc(o)+'</span></button>'});
+    h+='<div class="note">Oylarınız cihazınızda saklanır. Bass ailesi oyları "stratejik" bulur.</div>';
+  } else {
+    POLL_OPTS.forEach((o,i)=>{
+      const p=Math.round(poll.counts[i]/total*100);
+      h+='<div class="opt"><div class="bar" style="width:'+p+'%"></div><span>'+(i===poll.choice?'✔ ':'')+esc(o)+'</span><b class="pct">%'+p+'</b></div>';
+    });
+    h+='<div class="done">Oyunuz alındı. Teşekkürler. — CB Haber Anket Masası</div>';
+    h+='<div class="note" style="text-align:center"><a href="#" onclick="resetPoll();return false" style="color:var(--gold);text-decoration:underline">Oylamayı değiştir</a></div>';
+  }
+  return h+'</div>';
+}
+function vote(i){if(poll.voted)return;poll.counts[i]++;poll.voted=true;poll.choice=i;LS.set('cb_poll_v1',poll);render();}
+function resetPoll(){poll.counts[poll.choice]--;poll.voted=false;poll.choice=-1;LS.set('cb_poll_v1',poll);render();}
+function sidebarHTML(){
+  const top=allArts().slice().sort((a,b)=>score(b)-score(a)).slice(0,10);
+  return '<aside>'
+   +'<div class="widget"><div class="hd"><i>▲</i> CHUCK BASS GÜNDEMİ — EN ÇOK KONUŞULAN 10</div><div class="in"><ol class="rank">'
+   +top.map(a=>'<li onclick="location.hash=\'#/haber/'+a.id+'\'"><div><h4>'+esc(a.title)+'</h4><small>'+fmt(score(a))+' etkileşim · '+(CATS[a.cat]||'')+'</small></div></li>').join('')
+   +'</ol></div></div>'
+   +'<div class="widget"><div class="hd"><i>◈</i> GÜNÜN ANKETİ</div><div class="in">'+pollHTML()+'</div></div>'
+   +'<div class="widget"><div class="hd"><i>✎</i> EDİTÖRÜN NOTU</div><div class="in"><p class="editor-note"><b>PARODİ HATIRLATMASI</b>Bu sitedeki hiçbir haber gerçek değildir. Simitler 15 TL, kahveler 90 TL, Chuck Bass ise kurgusaldır. Yine de okuyorsanız: hoş geldiniz, doğru adrestesiniz.</p></div></div>'
+   +'</aside>';
+}
+function homeHTML(){
+  const hero=A[0];
+  const rest=allArts().filter(a=>a.id!=='a1').sort((a,b)=>b.date.localeCompare(a.date,true));
+  return '<div class="wrap"><section class="hero">'
+   +'<div class="photo">'+phImg(hero.img)+'<div class="fake-tag">HAYALİ MANŞET · PARODİ</div><div class="cap">Chuck Bass, "Kızılay\'da görüntülenme" (görsel temsilidir, simit 15 TL\'dir)</div></div>'
+   +'<div class="side"><span class="sd">SON DAKİKA · MAGAZİN</span>'
+   +'<h2>'+esc(hero.title)+'</h2><p class="lead">'+esc(hero.lead)+'</p>'
+   +'<div class="meta">Kalem: <b>'+AUTHORS[hero.author][0]+'</b> · '+hero.date+' · '+fmt(hero.views)+' görüntülenme</div>'
+   +'<button class="go" onclick="location.hash=\'#/haber/'+hero.id+'\'">HABERİ OKU →</button></div></section>'
+   +'<div class="cols"><section><div class="sec-title">GÜNCEL HABERLER <small>hepsi hayal ürünüdür</small></div><div class="grid">'
+   +rest.slice(0,10).map(cardHTML).join('')+'</div></section>'+sidebarHTML()+'</div></div>';
+}
+function catHTML(cat){
+  const arts=allArts().filter(a=>a.cat===cat);
+  return '<div class="wrap"><div class="page-title">'+(CATS[cat]||cat)+'</div>'
+   +'<div class="page-sub">Bu bölümdeki '+arts.length+' haberin tamamı kurgudur. Gerçek olan tek şey: simit 15 TL.</div>'
+   +'<div class="cols"><section><div class="grid">'+arts.map(cardHTML).join('')+'</div></section>'+sidebarHTML()+'</div></div>';
+}
+function articleHTML(id){
+  const a=findArt(id);if(!a)return '<div class="wrap"><p style="padding:60px 0">Haber bulunamadı. Bass bile şaşırdı.</p></div>';
+  views[id]=(views[id]||0)+1;LS.set('cb_views_v1',views);
+  const [name,role]=AUTHORS[a.author]||[a.author||'CB Haber','Muhabir'];
+  const cs=commentsFor(id);
+  const rel=allArts().filter(x=>x.cat===a.cat&&x.id!==id).slice(0,3);
+  const body=(a.body||[]).map(p=>{
+    if(p.startsWith('Q:')){const [q,c]=p.slice(2).split('|');return '<blockquote>'+esc(q)+(c?'<cite>'+esc(c)+'</cite>':'')+'</blockquote>'}
+    return '<p>'+esc(p)+'</p>';
+  }).join('');
+  return '<div class="wrap article"><div class="crumb"><a href="#/">Ana Sayfa</a> › <a href="#/kategori/'+a.cat+'">'+(CATS[a.cat]||'')+'</a> › Haber</div>'
+   +'<div class="cat">'+(CATS[a.cat]||'')+' · PARODİ HABER</div><h1>'+esc(a.title)+'</h1>'
+   +'<p class="lead">'+esc(a.lead)+'</p>'
+   +'<div class="byline"><div class="avatar">'+esc(name[0])+'</div><div><b>'+esc(name)+'</b><div class="role">'+esc(role)+'</div></div>'
+   +'<div class="stats">'+a.date+' · '+fmt((a.views||0)+(views[id]||0))+' görüntülenme · '+cs.length+' yorum</div></div>'
+   +'<div class="figure">'+phImg(a.img)+'</div><div class="figcap">Fotoğraf: CB Haber arşivi (temsilîdir). Görseldeki simit fiyatları 15 TL\'dir.</div>'
+   +'<div class="body">'+body+'</div>'
+   +'<div class="tags">'+(a.tags||[]).map(t=>'<span>#'+esc(t)+'</span>').join('')+'</div>'
+   +'<div class="related"><div class="sec-title">İLGİNİZİ ÇEKEBİLİR</div><div class="grid">'+rel.map(cardHTML).join('')+'</div></div>'
+   +'<section class="comments"><div class="sec-title">OKUR YORUMLARI <small>'+cs.length+' yorum · sansür yok, gerçeklik de yok</small></div>'
+   +'<div class="c-form"><h4>YORUM YAZ</h4>'
+   +'<input id="cName" placeholder="Adınız (opsiyonel, \'İsimsiz Okur\' kalır)">'
+   +'<textarea id="cText" placeholder="Düşünceniz... (ör: \'Simit 15 TL, itirazım yok\')"></textarea>'
+   +'<button onclick="addComment(\''+id+'\')">GÖNDER</button>'
+   +'<div class="hint">Yorumlar yalnızca bu tarayıcıda saklanır. Bass okumaz, çünkü stratejik sessizliktedir.</div></div>'
+   +'<div id="cList">'+cs.map(c=>'<div class="comment"><div class="avatar">'+esc((c.name||'İ')[0])+'</div><div><h5>'+esc(c.name||'İsimsiz Okur')+'<small>'+esc(c.date||'')+'</small></h5><p>'+esc(c.text)+'</p></div></div>').join('')
+   +(cs.length?'':'<div class="no-c">Henüz yorum yok. İlk yorumu siz yapın — Bass\'in onayına gerek yok.</div>')+'</div></section></div>';
+}
+function addComment(id){
+  const n=document.getElementById('cName').value.trim(),t=document.getElementById('cText').value.trim();
+  if(!t){alert('Yorum boş olamaz. Sessizlik Bass\'e aittir.');return}
+  extraComments[id]=extraComments[id]||[];
+  extraComments[id].push({name:n||'İsimsiz Okur',text:t,date:'17 Kasım 2026'});
+  LS.set('cb_comments_v1',extraComments);render();
+}
+function gundemHTML(){
+  const top=allArts().slice().sort((a,b)=>score(b)-score(a));
+  return '<div class="wrap"><div class="page-title">CHUCK BASS GÜNDEMİ</div>'
+   +'<div class="page-sub">En çok konuşulan (ve tamamen hayali) haberler · görüntülenme + yorum etkileşimine göre sıralandı</div>'
+   +'<div class="cols"><section><div class="grid">'+top.map(cardHTML).join('')+'</div></section>'+sidebarHTML()+'</div></div>';
+}
+function panelHTML(){
+  return '<div class="wrap"><div class="page-title">YÖNETİCİ PANELİ</div>'
+   +'<div class="page-sub">Haber ekleme · kategori sistemi · yerel veri (localStorage)</div>'
+   +'<div class="warn">⚠ Buradan eklediğiniz haberler de parodi kapsamındadır. Cihazınızda saklanır, sunucuya gitmez. Gerçek haber yayımlamaya çalışırsanız Bass\'in avukatları değil, sadece vicdanınız devreye girer.</div>'
+   +'<div class="panel"><form id="pForm"><h3 style="font-family:var(--serif);margin-bottom:4px">Yeni Haber Gir</h3>'
+   +'<label>Başlık</label><input id="pT" required placeholder="Örn: Chuck Bass metroya bindi, koltuk satın aldı">'
+   +'<div class="row"><div><label>Kategori</label><select id="pC">'+Object.entries(CATS).map(([k,v])=>'<option value="'+k+'">'+v+'</option>').join('')+'</select></div>'
+   +'<div><label>Yazar</label><select id="pA">'+Object.entries(AUTHORS).map(([k,v])=>'<option value="'+k+'">'+v[0]+'</option>').join('')+'</select></div></div>'
+   +'<label>Görsel URL (boş bırakılırsa CB logosu)</label><input id="pI" placeholder="https://...">'
+   +'<label>Spot (lead)</label><input id="pL" required placeholder="Haberin özeti...">'
+   +'<label>Metin (her satır bir paragraf; "Q:" ile başlayan satır alıntı olur)</label><textarea id="pB" required></textarea>'
+   +'<button type="submit" style="background:var(--black);color:#fff;font-family:var(--ui);font-weight:700;letter-spacing:.12em;padding:12px 26px;border:0;cursor:pointer">HABERİ YAYIMLA</button></form>'
+   +'<div class="sec-title" style="margin-top:40px">YAYINLANAN (KULLANICI) HABERLER</div>'
+   +'<div class="u-list" id="uList"></div></div></div>';
+}
+function renderUserList(){
+  const el=document.getElementById('uList');if(!el)return;
+  el.innerHTML=userArts.length?userArts.slice().reverse().map(a=>'<article><div><h4>'+esc(a.title)+'</h4><small>'+(CATS[a.cat]||'')+' · '+esc(a.date)+'</small></div><button class="del" onclick="delArt(\''+a.id+'\')">SİL</button></article>').join('')
+   :'<div class="no-c">Henüz kullanıcı haberi yok. İlk absürt haberi siz yazın.</div>';
+}
+function delArt(id){userArts=userArts.filter(a=>a.id!==id);LS.set('cb_articles_v1',userArts);render();}
+function render(){
+  const h=location.hash.replace(/^#/,'')||'/';
+  const app=document.getElementById('app');
+  document.querySelectorAll('nav.main a').forEach(x=>x.classList.remove('active'));
+  if(h==='/'){app.innerHTML=homeHTML()}
+  else if(h.startsWith('/kategori/')){app.innerHTML=catHTML(h.split('/')[2]);const l=document.querySelector('nav.main a[href="#/kategori/'+h.split('/')[2]+'"]');if(l)l.classList.add('active')}
+  else if(h.startsWith('/haber/')){app.innerHTML=articleHTML(h.split('/')[2])}
+  else if(h==='/gundem'){app.innerHTML=gundemHTML();document.querySelector('nav.main a[href="#/gundem"]').classList.add('active')}
+  else if(h==='/panel'){app.innerHTML=panelHTML();renderUserList();bindPanel()}
+  else{app.innerHTML=homeHTML()}
+  window.scrollTo(0,0);
+}
+function bindPanel(){
+  const f=document.getElementById('pForm');if(!f)return;
+  f.onsubmit=e=>{
+    e.preventDefault();
+    const art={id:'u'+Date.now(),cat:document.getElementById('pC').value,
+      title:document.getElementById('pT').value,lead:document.getElementById('pL').value,
+      body:document.getElementById('pB').value.split('\n').filter(x=>x.trim()),
+      author:document.getElementById('pA').value,img:document.getElementById('pI').value||IMG.chuckBar,
+      date:'17 Kasım 2026 · '+new Date().toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit'}),
+      views:0,tags:['Yeni','Parodi'],comments:[]};
+    userArts.push(art);LS.set('cb_articles_v1',userArts);
+    location.hash='#/haber/'+art.id;
+  };
+}
+function buildTicker(){
+  const items=TICKER_EXTRA.concat(allArts().slice(0,8).map(a=>a.title));
+  const html=items.map(t=>'<span>'+esc(t)+'</span>').join('');
+  document.getElementById('ticker').innerHTML=html+html;
+}
+document.getElementById('q').addEventListener('input',e=>{
+  const v=e.target.value.toLowerCase();
+  if(!v){render();return}
+  const res=allArts().filter(a=>(a.title+a.lead+(a.tags||[]).join()).toLowerCase().includes(v));
+  document.getElementById('app').innerHTML='<div class="wrap"><div class="page-title">ARAMA: "'+esc(e.target.value)+'"</div><div class="page-sub">'+res.length+' sonuç bulundu (hepsi kurgu)</div><div class="grid">'+(res.length?res.map(cardHTML).join(''):'<p style="font-family:var(--ui);color:var(--muted)">Sonuç yok. Bass bile aramayı beğenmedi.</p>')+'</div></div>';
+});
+window.addEventListener('hashchange',render);
+buildTicker();render();
+</script>
+</body>
+</html>
